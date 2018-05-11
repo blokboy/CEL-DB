@@ -46,6 +46,7 @@ Here's a tl;dr of my findings:
 - The DB can be queried by anyone who has the contract address and ABI
 - It is fully decentralized, there is no closed backend that is adding data to the DB. It's all done via smart contract.
 - This strategy could have some pretty neat applications for upgradeable contracts and eternal storage. Writing permissions could always be transferred to different contracts via the `Ownable` contract.
+- This a decentralized DB system that works *TODAY* with no threat of breaking due to experimental features.
 
 **You should use the CEL-DB if:**
 - You want to have a shareable, fully decentralized DB

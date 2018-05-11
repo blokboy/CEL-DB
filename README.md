@@ -11,7 +11,7 @@ To build a database system that is/can:
 - [x] Be queried by anyone
 - [x] Be easily shared
 
-One could use [OrbitDB](https://github.com/orbitdb/orbit-db) because it can be easily shared (via the address hash) and be queried by anyone who has the DB address, but it requires a closed backend that receives event data and adds it to the DB. This defeats the purpose of the challenge.
+One could use [OrbitDB](https://github.com/orbitdb/orbit-db) because it can be easily shared (via the address hash) and be queried by anyone who has the DB address, but it requires a closed backend that receives event data and adds it to the DB. This defeats the purpose of the challenge. Other problems include it being built on an experimental feature (pubsub).
 
 ## Methodology
 
@@ -33,7 +33,7 @@ In this example, our "Table" (table in quotes refers to our makeshift SQL table)
 
 The second part, web3.js, allows developers to query the blockchain and obtain all past events of a certain event at a particular block number ranges with specific filters. By querying our smart contract for the latest instance of our Table event with specific row and column(optional) values we can obtain the data in our "Table". Now, instead of event logs being data that passes through our Dapp when our node picks them up, logs can be things we query to search for the latest value in a table. Only obtaining the latest instance of an event is essential in order to know the current values of our table since the blockchain never erases or forgets data. This is a trivial function to implement using web3.
 
-To prevent our app from starting at block 0 every time we query the blockchain, we use a strtingBlock variable that holds the block at which the latest event instance returned was published at minus 1. So if our latest event was caught at block #9001, our new starting block when querying the blockchain for another responses would be block #9000. If we didn't do this, our serach would take a long time eventually as our DB becomes more and more populated and more changes are made.
+To prevent our app from starting at block 0 every time we query the blockchain, we use a startingBlock variable that holds the block at which the latest event instance returned was published at minus 1. So if our latest event was caught at block #9001, our new starting block when querying the blockchain for another responses would be block #9000. If we didn't do this, our search would take a long time eventually as our DB becomes more and more populated and more changes are made.
 
 ## Findings
 
@@ -46,5 +46,12 @@ Here's a tl;dr of my findings:
 - The DB can be queried by anyone who has the contract address and ABI
 - It is fully decentralized, there is no closed backend that is adding data to the DB. It's all done via smart contract.
 - This strategy could have some pretty neat applications for upgradeable contracts and eternal storage. Writing permissions could always be transferred to different contracts via the `Ownable` contract.
+
+**You should use the CEL-DB if:**
+- You want to have a shareable, fully decentralized DB
+- You will be routing data from event logs into your own DB anyways
+- You want to have a DB that can anyone can read from
+
+My [decentralized identity project](https://medium.com/ghilia-weldesselasie/decentralized-online-profiles-bfa3fb85d449), the reason I undertook this challenge in the first place, checks all of those boxes which makes CEL-DB a perfect fit.
 
 Explore the Database smart contract, `Database.sol`, and the `index.js` file to see how data is added to our event table and the latest instance of an event is retrieved.

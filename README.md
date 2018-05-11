@@ -1,14 +1,15 @@
 # CEL-DB
-The Contract Event Log Database - log data in event logs on smart contracts, retrieve the data with web3.js
+The Contract Event Log Database - log data in event logs on smart contracts, retrieve the data with web3js.
+
 *An experiment by Ghilia Weldesselasie*
 
 ## Challenge
 
 To build a database system that is/can:
-[x] Fully decentralized (no closed backend)
-[x] Hold data from smart contract event logs
-[x] Be queried by anyone
-[x] Be easily shared
+- [x] Fully decentralized (no closed backend)
+- [x] Hold data from smart contract event logs
+- [x] Be queried by anyone
+- [x] Be easily shared
 
 One could use [OrbitDB](https://github.com/orbitdb/orbit-db) because it can be easily shared (via the address hash) and be queried by anyone who has the DB address, but it requires a closed backend that receives event data and adds it to the DB. This defeats the purpose of the challenge.
 
